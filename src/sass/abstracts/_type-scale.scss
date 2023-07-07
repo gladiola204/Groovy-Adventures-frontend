@@ -1,0 +1,95 @@
+$type-scale: (
+    mobileS: (
+        //800: 3.653rem,
+        //800: 3.583rem,
+        600: calc(1vw + 0.2vh + 1rem),
+        700: 6vw,
+        800: 9.2vw,
+        1000: 13vw,
+    ),
+    mobileM: (
+        600: calc(1.4vw + 0.2vh + 1rem),
+        700: 6vw,
+        800: 9.2vw,
+        1000: 13vw,
+    ),
+    mobileL: (
+        600: calc(1.4vw + 0.4vh + 1rem),
+        700: 6vw,
+        800: 9.2vw,
+        1000: 13vw,
+    ),
+    tablet: (
+        600: calc(2.2vw + 1.1vh + 0.01rem),
+        700: 5.5vw,
+        800: 7.5vw,
+        1000: 10vw,
+    ),
+    laptop: (
+        600: calc(1.5vw + 1rem),
+        700: 6vw,
+        800: 9vw,
+        1000: 10vw
+    ),
+    laptopL: (
+        500: 1vw,
+        600: calc(1.5vw + 1rem),
+        700: 2.5vw,
+        750: 4.3vw,
+        800: 4.7vw,
+        1000: 5vw,
+    ),
+    small: (
+        // 200: 0.875rem,
+        // 300: 1rem,
+        // 400: 0.9375rem,
+        // 500: 1.75rem,
+        // 600: 1rem,
+        // 700: 1.5rem,
+        // 800: 5rem // clamp(5rem, 7vw + 1rem, 9.375rem);
+        200: 1rem,
+        300: 1.414rem,
+        400: 1.999rem,
+        500: 2.827rem,
+        600: 3.5rem,
+        700: 3.998rem,
+        800: 5.5rem,
+
+        // TEST
+        vw-700: 9.2vw
+    ),
+    medium: (
+        200: 0.875rem,
+        300: 1rem,
+        400: 1rem,
+        500: 1.75rem,
+        //600: 1.5rem,
+        600: 5.6rem,
+        700: 2.5rem,
+        //800: 5rem,
+        800: 15rem,
+        900: 9.375rem, // clamp(5rem, 7vw + 1rem, 9.375rem);
+
+        // TEST
+        vw-700: 10vw
+    ),
+    big: (
+        // 200: 0.875rem,
+        // 300: 1rem,
+        // 400: 1.125rem,
+        // 500: 1.75rem,
+        // 600: 2rem,
+        // 700: 3.5rem,
+        // 800: 6.25rem,
+        // 900: 9.375rem, // clamp(5rem, 7vw + 1rem, 9.375rem);
+        300: 1rem,
+        400: 4rem,
+        500: 6rem,
+        600: 9rem,
+        700: 12rem,
+        800: 15rem,
+
+        // TEST
+        vw-700: 6vw
+    )
+)

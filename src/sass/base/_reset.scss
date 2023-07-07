@@ -1,0 +1,50 @@
+@use 'root' as *;
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    //font-family:;
+    background-color: var(--clr-white);
+    line-height: 1.5;
+    min-height: 100vh;
+    overflow-x: hidden;
+};
+
+html {
+    font-size: 10px;
+}
+
+img, 
+picture {
+    max-width: 100%;
+    display: block;
+    object-fit: cover;
+};
+
+input, button, textarea, select {
+    font: inherit;
+};
+
+a {
+    text-decoration: none;
+};
+
+section {
+    width: 100%;
+}

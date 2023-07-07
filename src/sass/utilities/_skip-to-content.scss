@@ -1,0 +1,16 @@
+.skip-to-content {
+    position: absolute;
+    z-index: 9999;
+    background: var(--clr-white);
+    color: var(--clr-dark);
+    border: 1px solid var(--clr-dark);
+    border-radius: 10px;
+    padding: 1em 2em;
+    margin-inline: auto;
+    transform: translateY(-100%);
+    transition: transform 250ms ease-in;
+}
+
+.skip-to-content:focus {
+    transform: translateY(0);
+}

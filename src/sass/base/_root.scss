@@ -1,0 +1,63 @@
+@use '../abstracts' as *;
+@use '../abstracts/mixins' as *;
+
+:root {
+    --clr-black: 0 0% 0%;
+    --clr-white: 0 0% 100%;
+    --clr-orange: 30 53% 50%;
+
+    /* Font-families  */
+    --ff-hippie: Hippie;
+    --ff-cambai: Cambai;
+
+    @each $screen-size, $font-size in $type-scale {
+        @if $screen-size == mobileS {
+            @each $size, $value in $font-size {
+                --fs-#{$size}: #{$value};
+            }
+        // } @else if $screen-size == medium {
+        //    @include mq(medium) {
+        //         @each $size, $value in $font-size {
+        //             --fs-#{$size}: #{$value};
+        //         }
+        //    }
+        // } @else {
+        //     @include mq(large) {
+        //         @each $size, $value in $font-size {
+        //             --fs-#{$size}: #{$value};
+        //         }
+        //    }
+        // }
+        } @else if $screen-size == mobileM {
+            @include mq(mobileM) {
+                @each $size, $value in $font-size {
+                    --fs-#{$size}: #{$value};
+                }
+            }
+        } @else if $screen-size == mobileL {
+            @include mq(mobileL) {
+                @each $size, $value in $font-size {
+                    --fs-#{$size}: #{$value};
+                }
+            }
+        } @else if $screen-size == tablet {
+            @include mq(tablet) {
+                @each $size, $value in $font-size {
+                    --fs-#{$size}: #{$value};
+                }
+            }
+        } @else if $screen-size == laptop {
+            @include mq(laptop) {
+                @each $size, $value in $font-size {
+                    --fs-#{$size}: #{$value};
+                }
+            }
+        } @else if $screen-size == laptopL {
+            @include mq(laptopL) {
+                @each $size, $value in $font-size {
+                    --fs-#{$size}: #{$value};
+                }
+            }
+        }
+    }
+}

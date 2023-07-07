@@ -1,0 +1,38 @@
+@use './breakpoints' as *;
+
+@mixin mq($key) {
+    $size: map-get($breakpoints, $key);
+
+    @media only screen and (min-width: $size) {
+        @content;
+    }
+};
+
+@mixin flex($justify: center, $align: center, $direction: row, $gap: 1rem) {
+    display: flex;
+    justify-content: $justify;
+    align-items: $align;
+    flex-direction: $direction;
+    gap: $gap;
+};
+
+@mixin grid-container($columns: 12, $gap: 20px, $container-max-width: 1200px) {
+    display: grid;
+    grid-template-columns: repeat($columns, 1fr);
+    gap: $gap;
+    max-width: $container-max-width;
+    margin-left: auto;
+    margin-right: auto;
+}
+  
+@mixin grid-item($column-start, $column-span: 1) {
+    grid-column-start: $column-start;
+    grid-column-end: span $column-span;
+}
+
+@mixin background-image($url, $position: center  center) {
+    background-image: url($url);
+    background-size: cover;
+    background-position: $position;
+    background-repeat: no-repeat;
+}
