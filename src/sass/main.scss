@@ -1,7 +1,8 @@
 @use './abstracts';
 @use './base';
 @use './utilities';
-@use './layouts/home';
+@use './layouts';
+@use './components';
 
 /* Heading */
 h1,
@@ -20,4 +21,8 @@ h4 {
   border-radius: 5px;
   box-shadow: var(--box-shadow);
   overflow: hidden;
+}
+
+.blockText {
+  display: block;
 }

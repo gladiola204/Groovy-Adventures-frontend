@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import iconImg from '../../assets/icon-black.png';
+import iconImg from '../../assets/groovyAdventuresIcon-black.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMobileRetro, faSignsPost, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { faInstagramSquare } from '@fortawesome/free-brands-svg-icons';
@@ -54,7 +54,7 @@ function Home() {
                         <div className='hero-section'>
                             <div className='text-section'>
                                 <h1>
-                                    Experience the <span> Magic of the 60s</span>
+                                    Experience the <span className='blockText'> Magic of the 60s</span>
                                     <span className='hop-text'>Hop on our Hippie Bus Tours</span>
                                 </h1>
                             </div>

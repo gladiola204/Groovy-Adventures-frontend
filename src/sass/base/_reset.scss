@@ -18,6 +18,10 @@ ul {
     padding: 0;
 }
 
+h1 {
+    font-family: var(--ff-hippie);
+}
+
 body {
     //font-family:;
     background-color: var(--clr-white);
@@ -47,4 +51,8 @@ a {
 
 section {
     width: 100%;
+}
+
+button {
+    cursor: pointer;
 }
