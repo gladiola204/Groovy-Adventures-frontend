@@ -1,0 +1,211 @@
+@use '../abstracts/index' as *;
+
+.tour-page {
+    padding-top: 15vh;
+    padding-inline: 2vw;
+    display: grid;
+    grid-template-columns: 55vw 30vw;
+    gap: 3vw 6.5vw;
+
+    &__info {
+        @include flex($direction: column, $gap: 2vw, $align: flex-start);
+        position: relative;
+        padding-bottom: 2vw;
+    }
+
+    &__nav {
+        position: sticky;
+        top: 12vh;
+    }
+
+    &__nav-list {
+        @include flex($gap: 1vw);
+    }
+
+    &__nav-link {
+        padding: 1vw;
+        color: hsl(var(--clr-white) / 1);
+        font-size: 1rem;
+        font-family: var(--ff-cambai);
+        font-weight: bold;
+        letter-spacing: 1.5px;
+        background-color: hsl(var(--clr-coffee) / 0.8);
+        border-radius: 2px;
+        transition: all 300ms ease-in-out; 
+        cursor: pointer;
+
+        &:hover,
+        &--active {
+            background-color: hsl(var(--clr-coffee) / 1);
+            scale: 1.1;
+        }
+    }
+
+    &__info-section {
+
+        &--general {
+        }
+
+        &--journey-plan {
+            display: flex;
+            flex-direction: column;
+        }
+
+        &--date {
+        }
+
+        &--reviews {
+            @include flex($direction: column, $align: flex-start, $gap: 2vw);
+        }
+
+        &--hidden {
+            display: none;
+        }
+    }
+
+    &__info-header {
+        font-weight: bold;
+        color: hsl(var(--clr-coffee) / 1);
+        font-size: inherit;
+    }
+
+    &__info-paragraph {
+        position: relative;
+        padding-block: 1vw;
+
+        &:first-child {
+            padding-top: 0;
+        }
+
+        &:last-child {
+            padding-bottom: 0;
+        }
+
+        &--bold {
+            font-weight: bold;
+            color: hsl(var(--clr-coffee) / 1);
+            font-size: inherit;
+        }
+    }
+
+    &__day-info-list {
+        @include flex($direction: column, $align: flex-start, $gap: 1vw);
+        margin-top: 1vw;
+    }
+
+    &__day-info {
+        position: relative;
+        margin-left: 5%;
+
+        &::before {
+            content: "";
+            background-color: hsl(var(--clr-coffee) / 1);
+            position: absolute;
+            right: 103%;
+            top: 50%;
+            width: 0.3rem;
+            height: 0.3rem;
+            border-radius: 50%;
+            transform: translateY(-50%);
+        }
+    }
+
+    &__border-bottom {
+        position: relative;
+    
+        &::after {
+            content: '';
+            display: block;
+            position: absolute;
+            left: 10%;
+            bottom: 0;
+            background-color: hsl(var(--clr-coffee) / 0.8);
+            width: 80%;
+            height: 1.5px;
+            border-radius: 32px;
+        }
+    }
+
+
+
+    // Reviews
+    &__rate-item {
+        display: grid;
+        grid-template-columns: repeat(9, 1fr);
+        column-gap: 0.5vw;
+    }
+
+    &__type-of-rate {
+        grid-column: 1 / 4;
+        font-size: 1rem;
+    }
+
+    &__rectangle {
+        background-color: transparent;
+        border: 3px solid hsl(var(--clr-coffee) / 1);
+
+        &--half-filled {
+            position: relative;
+            &::before {
+                content: '';
+                display: block;
+                position: absolute;
+                width: 50%;
+                height: 100%;
+                background-color: hsl(var(--clr-coffee) / 1);
+            }
+        }
+        &--fullfilled {
+            background-color: hsl(var(--clr-coffee) / 1);
+        }
+    }
+
+    &__rate {
+    }
+
+    &__reviews-list {
+
+    }
+
+    &__review {
+
+    }
+
+    &__review-header {
+        @include flex($justify: flex-start, $align: flex-start);
+        font-size: 1rem;
+    }
+
+    &__user-rate {
+        font-size: 1.5rem;
+        color:hsl(var(--clr-coffee) / 1);
+    }
+
+    &__bigger-rate {
+        font-size: 3rem;
+        transform: translateY(-10%);
+    }
+
+    &__comment {
+
+    }
+
+    &__review-date {
+        color: hsl(var(--clr-gray) / 1);
+    }
+
+    &__btn-show-more {
+        background-color: transparent;
+        color: hsl(var(--clr-coffee) / 1);
+        font-size: 1rem;
+        font-weight: bold;
+        border: none;
+        border-bottom: 1px solid hsl(var(--clr-coffee) / 1);
+    }
+
+    &__arrow-right {
+        font-size: 1rem;
+        color: inherit;
+    }
+
+}

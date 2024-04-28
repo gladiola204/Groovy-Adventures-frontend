@@ -1,0 +1,50 @@
+@use '../abstracts' as *;
+
+.search-list {
+    @include flex($direction: column, $justify: flex-start);
+
+    width: 85%;
+    max-height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    &__item {
+        width: 100%;
+        border-bottom: 1px solid hsl(var(--clr-red) / .4);
+        cursor: pointer;
+        position: relative;
+    }
+
+    &__link {
+        @include flex($justify: flex-start, $gap: 50px);
+        width: 100%;
+        padding-block: var(--mg-small);
+
+        color: hsl(var(--clr-black) / 1);
+
+        
+        & > * {
+            transition: scale 100ms;
+        }
+
+        &:hover > * {
+            scale: 1.1;
+        }
+
+    }
+
+    &__icon {
+        width: 2rem;
+        height: auto;
+    }
+
+    &__title {
+        font-size: 1rem;
+        font-family: var(--ff-montserrat);
+        letter-spacing: 1px;
+
+        &--bold {
+            font-weight: bold;
+        }
+    }
+}

@@ -1,0 +1,90 @@
+@use '../abstracts/index' as *;
+
+
+.ReactModal__Overlay {
+    @include flex();
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    z-index: 9998;
+
+    &--after-open > .ReactModal__Modal {
+        opacity: 1;
+        transform: translateY(0%);
+    }
+
+    &--before-close > .ReactModal__Modal {
+        opacity: 0;
+        transform: translateY(100%);
+    }
+
+    &:has(.ReactModal__Modal--login) {
+        background-color: hsl(var(--clr-black) / .2);
+    };
+
+    @include mq(large) {
+        background-color: hsl(var(--clr-black) / .2);
+    };
+}
+
+.ReactModal__Modal {
+    @include flex($direction: column, $gap: 2vh);
+    z-index: 9999;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(181, 48, 0, 0.2);
+    padding-block: 10vh;
+
+    opacity: 0;
+    transform: translateY(100%);
+    transition: opacity 1000ms ease-in-out,
+                transform 1000ms cubic-bezier(.53,.11,.15,1.39);
+
+    @supports (backdrop-filter: blur(0.5rem)) {
+        background-color: rgba(255, 255, 255, 0.1);
+        background-image: linear-gradient(58deg, hsla(358, 76%, 26%, 0.4) 0%, rgba(255, 255, 255, 0.5) 60%);
+        backdrop-filter: blur(1.5rem);
+    }
+
+    &--counter-travellers {
+        position: absolute;
+        height: fit-content;
+        bottom: 0;
+    }
+
+    &--calendar,
+    &--login {
+
+        @include mq(large) {
+            inset: 50%;
+            width: fit-content;
+            max-width: 95vw;
+            height: fit-content;
+            max-height: 95vh;
+            padding: 10vh 5vh;
+            border-radius: 32px;
+
+            background-color: rgba(255, 255, 255, 0.1);
+            background-image: linear-gradient(58deg, hsla(358, 76%, 26%, 0.3) 0%, rgba(255, 255, 255, 0.7) 60%);
+
+            box-shadow: 0px 0px 26px 0px rgba(0, 0, 0, 0.7);
+        }
+    }
+
+    &--login {
+        padding: 5vh 10vh 10vh 10vh;
+        overflow: hidden;
+        justify-content: flex-start;
+        height: min-content;
+        width: min-content;
+        border-radius: 32px;
+
+        @include mq(large) {
+            height: 70vh;
+            width: 30vw;
+            padding: 5vh;
+            overflow: hidden;
+            justify-content: flex-start;
+        }
+    }
+}

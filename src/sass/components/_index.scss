@@ -1,5 +1,14 @@
-@forward './searchBar';
-@forward './modals/calendarModal';
-@forward './modals/destinationModal';
+@forward './buttons';
 @forward './modals/shared/modalNextSection';
 @forward './modals/shared/modalCloseButton';
+@forward './modals/calendarModal';
+@forward './modals/destinationModal';
+@forward './modals/counterTravellersModal';
+@forward './modals/categoriesModal';
+@forward './searchBar';
+@forward './modal';
+@forward './searchList';
+@forward './dialog';
+@forward './modals/loginModal';
+@forward './photos-overview';
+@forward './reservation-card';

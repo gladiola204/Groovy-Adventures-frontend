@@ -1,0 +1,39 @@
+@use '../../abstracts' as *;
+
+.counter {
+
+    &__container {
+        @include flex($justify: space-between);
+        width: 85%;
+        font-family: var(--ff-cambai);
+        font-size: 20px;
+        font-weight: bold;
+
+    }
+
+    &__controls {
+        @include flex($justify: space-between, $gap: 4vw);
+        width: 53%;
+
+        @include mq(large) {
+            gap: 1vw;
+            width: 50%;
+        }
+    }
+
+    &__button {
+        @include flex();
+        background-color: transparent;
+        border: none;
+        transition: scale 100ms;
+
+        &:disabled {
+            cursor: auto;
+        }
+
+        &:not(:disabled):hover {
+            scale: 1.1;
+        }
+    }
+}
+

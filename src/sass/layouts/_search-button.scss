@@ -1,0 +1,17 @@
+@use '../abstracts' as *;
+
+.search-button {
+    @include flex($gap: 3vw, $justify: space-between);
+    padding: 0.5vh 1vw;
+    border-radius: 32px;
+    border: 1px solid hsl(var(--clr-black) / 0.5);
+    box-shadow: var(--shadow-basic);
+    width: 30%;
+    background-color: hsl(var(--clr-white) / 0.8);
+
+    &__icon {
+        width: 40px;
+        height: 40px;
+        color: hsl(var(--clr-coffee) / 1);
+    }
+}

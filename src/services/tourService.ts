@@ -1,5 +1,6 @@
-import { IImage, IReview, ISchedule} from "../redux/features/tour/tourSlice.interface";
-import request from "./axios";
+import { DailyItineraryDescription, Features, Image, PartialRatings, ReviewDoc, Schedule} from "../redux/features/tour/tourSlice.interface";
+import { request } from "./axios";
+import toFormData from "./utils/toFormData";
 
 const API_ADMIN_URL = '/api/admin/tours/';
 const API_URL = '/api/tours/';
@@ -7,56 +8,94 @@ const API_URL = '/api/tours/';
 export interface INewTour {
     title: string,
     generalDescription: string,
-    dailyItineraryDescription: string,
+    dailyItineraryDescription: DailyItineraryDescription,
     category: string,
-    schedule: Omit<ISchedule, '_id'>,
-    images: IImage[],
+    schedule: ScheduleWithoutId[],
+    images: File[],
+    features: Features,
+    destinations: string[],
 };
+
+export type ScheduleWithoutId = Omit<Schedule, 'id'>;
 
 export interface IUpdateTour {
     title?: string,
     category?: string,
     generalDescription?: string,
-    dailyItineraryDescription?: string,
-    updatedSchedules?: ISchedule,
-    newSchedules?: Omit<ISchedule, '_id'>,
-    deletedSchedules?: Object[],
-    idOfImagesToRemove?: Object[],
+    dailyItineraryDescription?: DailyItineraryDescription,
+    removeImages?: string[],
+    updateSchedule?: Schedule[],
+    newSchedule?: ScheduleWithoutId[],
+    deleteSchedule?: string[],
+    features?: Features,
+    destinations?: string[],
+    images?: File[],
 }
 
+export interface IGetTours {
+    tourIds: string[],
+}
+
+interface IQuery {
+    category?: string,
+    price?: string,
+    people?: string,
+    startDate?: string,
+    endDate?: string,
+    page: number,
+    limit: number,
+};
+
+export type CreateReviewData =  {
+    cleanliness: number,
+    valuePrice: number,
+    food: number,
+    communication: number,
+    attractions: number,
+    atmosphere: number,
+    comment: string,
+};
+
 async function createNewTour(tourData: INewTour) {
-    const response = await request.post(API_ADMIN_URL, tourData);
-    return response.data;
+    const response = await request.post(API_ADMIN_URL, toFormData(tourData));
+    return { data: response.data, showSuccessToast: true };
 };
 
 async function deleteTour(slug: string) {
     const response = await request.delete(API_ADMIN_URL + slug);
-    return response.data;
+    return { data: response.data, showSuccessToast: true };
 };
 
 async function getTour(slug: string) {
     const response = await request.get(API_URL + slug);
-    return response.data;
+    return { data: response.data, showSuccessToast: false };
 };
 
-async function getTours(tourFilters: string) {
-    const response = await request.get(API_URL + tourFilters);
-    return response.data;
+async function getTours(tourIds: string[]) {
+    const response = await request.get(API_URL, { params: {
+        tourIds: tourIds.join(','),
+    }});
+    return { data: response.data, showSuccessToast: false };
+};
+
+async function filterTours(tourFilters: IQuery) {
+    const response = await request.get(`${API_URL}filter`, { params: tourFilters });
+    return { data: response.data, showSuccessToast: false };
 }
 
 async function updateTour(slug: string, tourData: IUpdateTour) {
-    const response = await request.patch(API_ADMIN_URL + slug, tourData);
-    return response.data;
+    const response = await request.patch(API_ADMIN_URL + slug, toFormData(tourData));
+    return { data: response.data, showSuccessToast: true };
 };
 
-async function createReview({slug, reviewData}: { slug: string, reviewData: Omit<IReview, 'averagePartialRating' | '_id'>}) {
+async function createReview({slug, reviewData}: { slug: string, reviewData: CreateReviewData}) {
     const response = await request.post(`${API_URL}${slug}/reviews`, reviewData);
-    return response.data;
+    return { data: response.data, showSuccessToast: true };
 }
 
 async function deleteReview(id: string) {
     const response = await request.delete(`${API_URL}reviews/${id}`);
-    return response.data;
+    return { data: response.data, showSuccessToast: true };
 };
 
 const tourService = {
@@ -64,6 +103,7 @@ const tourService = {
     updateTour,
     deleteTour,
     getTour,
+    filterTours,
     getTours,
     createReview,
     deleteReview,

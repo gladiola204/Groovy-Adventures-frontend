@@ -1,0 +1,258 @@
+@use '../abstracts' as *;
+
+.header {
+    @include flex($justify: space-between, $align: stretch);
+
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 21vh;
+    width: 98.7vw;
+    z-index: 1000;
+    padding: 1rem 0rem 0rem 1rem;
+
+    &--tours-list {
+        background-color: hsl(var(--clr-coffee) / 1);
+        height: 10vh;
+        padding: 0.5rem;
+        border-bottom: 3px solid hsl(var(--clr-black) / 0.3);
+    }
+
+    @include mq(large) {
+        column-gap: 5vw;
+    }
+
+    &__logo {
+        width: 60%;
+
+        &--white {
+            color: hsl(var(--clr-white) / 0.9);
+        }
+
+        @include mq(large) {
+            height: 100%;
+        }
+    }
+
+    &__mobile-nav-toggle {
+        display: block;
+        position: absolute;
+        top: 4vh;
+        right: 10vw;
+        border: 0;
+        z-index: 9999;
+        background-color: transparent;
+
+        @include mq(large) {
+            display: none;
+        }
+    }
+
+    &__nav-item-list {
+        @include flex($align: stretch, $direction: column);
+    
+        position: fixed;
+        inset: 0 0 0 30%;
+        max-height: 100%;
+        z-index: 1000;
+        margin: 0;
+        padding: 0 0 0 5vw;
+        border-radius: 1rem;
+        //border: 1px solid red;
+        
+        background-color: hsl(var(--clr-white) / 0.2);
+        transform: translateX(100%);
+        transition: transform 350ms ease-in-out;
+
+        @supports (backdrop-filter: blur(1rem)) {
+            background: hsl(var(--clr-black) / 0.1);
+            backdrop-filter: blur(1rem);
+        }
+
+        &--tours-list {
+            background-color: transparent;
+        }
+
+        &[data-visible='true'] {
+            transform: translateX(0%);
+        }
+
+
+        @include mq(large) {
+            flex-direction: row;
+            transform: translateX(0%);
+            inset: unset;
+            position:unset;
+            min-height: 90%;
+        }
+    }
+
+    &__nav-item {
+        @include flex($justify: center, $align: center, $direction: column);
+        position: relative;
+        font-family: var(--ff-cambai);
+        font-weight: 700;
+        font-size: 2rem;
+        padding: 2vh 3vw;
+        border: 0;
+
+        &--block-padding {
+            padding: 0px 1.5vw;
+        }
+
+        @include mq(large) {
+            font-size: clamp(1.5rem, 2vw + 0.1rem, 3.5rem);
+            overflow: hidden;
+            cursor: pointer;
+            width: fit-content;
+
+            &:nth-child(2)::before,
+            &:first-child::after {
+                content: '';
+                width: 1.5px;
+                height: 50%;
+                position: absolute;
+                top: 50%;
+                left: 0;
+                transform: translateY(-50%);
+    
+                background-color: hsl(var(--clr-white) / .7);
+            }
+    
+            &:first-child:after {
+                right: 0;
+                left: unset;
+            }
+
+            &:not(:first-child)::after,
+            &:first-child::before {
+                content: '';
+                position: absolute;
+                height: 3px;
+                width: 100%;
+                bottom: 0;
+                background-color: hsl(var(--clr-white) / .7);
+                translate: var(--_translate, 0);
+                scale: var(--_width, 0) 1;
+                transition: 
+                    scale 300ms var(--_scale-delay, 0ms),
+                    translate 500ms var(--_translate-delay, 0ms);
+            }
+
+            &:hover {
+                --_width: 1;
+            }
+
+            @supports selector(:has(h1)) {
+                &:hover + .header__nav-item {
+                    --_translate: -100%;
+                    --_scale-delay: 300ms;
+                    --_translate-delay: 200ms;
+                }
+
+                &:has(+ :hover) {
+                    --_translate: 100%;
+                    --_scale-delay: 300ms;
+                    --_translate-delay: 200ms;
+                } 
+            }
+
+            &--dark-border {
+                &::before,
+                &::after {
+                    background-color: hsl(var(--clr-black) / 0.7) !important;
+                }
+            }
+        }
+    }
+
+    &__nav-link{
+        color: hsl(var(--clr-black) / 1);
+    }
+
+    &__nav-pill {
+        @include mq(large) {
+            background-color: transparent;
+            border: 0.2rem solid hsl(var(--clr-white));
+            border-radius: 50px;
+            padding: 1.5rem 2rem;
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+
+            &::before {
+                content: "";
+                position: absolute; 
+                left: 0;
+                bottom: 0;
+                display: block;
+                border-radius: 1000px;
+                width: 100%;
+                height: 100%;
+                background-color: hsl(var(--clr-white) / .8);
+                transform-origin: 0 bottom 0;
+                transform: scaleY(0);
+                transition: all .4s ease-out;
+                z-index: -1;
+            }
+    
+            &:hover::before {
+                transform: scaleY(1);
+            }
+        }
+    }
+
+    &__button {
+        background-color: transparent;
+        border: none;
+        width: 100%;
+        height: 100%;
+    }
+
+    &__user-icon {
+        height: 70px;
+    }
+
+    &__login {
+        font-size: 1rem;
+        margin-bottom: 0rem;
+        margin-top: 0.5rem;
+    }
+
+    &__categories {
+        font-size: clamp(1.5rem, 2vw + 0.1rem, 3.5rem);
+    }
+
+    &__arrow {
+        width: 35px;
+        height: 35px;
+        transition: all 500ms ease-in-out;
+        border-radius: 50px;
+
+        &--active {
+            rotate: 180deg;
+            background-color: hsl(var(--clr-black) / 0.7);
+            color: hsl(var(--clr-white) / 1);
+        }
+    }
+
+    &__shopping-cart-icon {
+        height: 100px;
+    }
+
+    &__heart-icon {
+        height: 40px;
+        width: auto;
+        color: hsl(var(--clr-white) / 0.8);
+    }
+
+    @include mq(large) {
+        .header { 
+            .underline-indicators > .active,
+            .underline-indicators > [aria-selected="true"] {
+                color: hsl(var(--clr-white));
+                border-color: hsl(var(--clr-white));
+            }
+        }
+    }
+}

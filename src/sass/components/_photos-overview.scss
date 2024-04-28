@@ -1,0 +1,13 @@
+@use '../abstracts/index' as *;
+
+// .photos-gallery {
+//     width: 55vw;
+//     height: auto;
+// }
+
+.image-gallery-slide-wrapper {
+    border-radius: 15px;
+    border: 1px solid hsl(var(--clr-black) / 0.6);
+    //box-shadow: var(--shadow-basic);
+    overflow: hidden;
+}

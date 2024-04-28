@@ -8,7 +8,7 @@
     }
 };
 
-@mixin flex($justify: center, $align: center, $direction: row, $gap: 1rem) {
+@mixin flex($justify: center, $align: center, $direction: row, $gap: 0rem) {
     display: flex;
     justify-content: $justify;
     align-items: $align;
@@ -35,4 +35,14 @@
     background-size: cover;
     background-position: $position;
     background-repeat: no-repeat;
+}
+
+@mixin animated-button{
+    box-shadow: 0px 1rem 1.5rem hsl(var(--clr-black)/0.4);
+    transition: all 100ms ease-in-out;
+
+    &:hover {
+        transform: translateY(5%);
+        box-shadow: 0px 0.5rem 0.8rem hsl(var(--clr-black) / .6);
+    }
 }

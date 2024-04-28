@@ -1,0 +1,27 @@
+@use '../abstracts' as *;
+
+.categories-bar {
+    width: 70%;
+    overflow-x: auto;
+
+    &__list {
+        @include flex($gap: 1vw, $justify: space-around);
+        width: 100%;
+        height: 100%;
+    }
+
+    &__category {
+        @include flex($direction: column);
+        width: fit-content;
+        height: 100%;
+    }
+
+    &__icon {
+        height: 2.81rem;
+        width: auto;
+    }
+
+    &__header {
+        font-size: 0.8rem;
+    }
+}

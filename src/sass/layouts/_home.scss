@@ -1,80 +1,5 @@
 @use '../abstracts' as *;
 
-.primary-header {
-    @include flex($justify: space-between, $align: center);
-
-    position: fixed;
-    left: 0;
-    top: 0;
-    height: 20vh;
-    width: 98.7vw;
-    z-index: 1000;
-    padding-top: 2vw;
-    padding-left: 2vw;
-    
-    & > .logo {
-        width: 60vw;
-        
-    }
-
-    & .mobile-nav-toggle {
-        display: block;
-        position: absolute;
-        top: 7vh;
-        right: 10vw;
-        border: 0;
-        z-index: 9999;
-        background-color: transparent;
-    }
-
-    & .primary-navigation {
-        @include flex($align: stretch, $gap: 6vw, $direction: column);
-        
-        margin-top: 0;
-        position: fixed;
-        inset: 0 0 0 30%;
-        background: hsl(0 0% 0% / 0.1);
-        z-index: 1000;
-        padding-left: 5vw;
-        padding-right: 2em;
-        padding-block: 0;
-        margin: 0;
-        max-height: 100%;
-        transform: translateX(100%);
-        transition: transform 350ms ease-in-out;
-
-        &[data-visible='true'] {
-            transform: translateX(0%);
-        }
-
-        & li {
-            @include flex($justify: center, $align: center, $direction: column);
-            padding-block: 2vh;
-        }
-        
-        & li a {
-            color: hsl(var(--clr-black));
-            font-family: var(--ff-cambai);
-            font-weight: 700;
-            font-size: 7vw;
-        }
-
-        & > :nth-child(2) {
-            display: none;
-        }
-
-        & li button {
-            background-color: transparent;
-            border: 0.2rem solid hsl(var(--clr-white));
-            border-radius: 100px;
-            padding: 2rem 3rem;
-        }
-    }
-
-    & .underline-indicators > * {
-        border: 0;
-    }
-}
 
 .snapScroller {
     scroll-snap-type: y mandatory;
@@ -238,15 +163,6 @@
 }
 
 
-@supports (backdrop-filter: blur(1rem)) {
-    .primary-navigation {
-        background: hsl(0 0% 0% / 0.1);
-        border-radius: 1rem;
-        backdrop-filter: blur(1rem);
-    }
-}
-
-
 @media (min-width: 31em) {
     .hero-section {
         background-position: 47% center;
@@ -254,66 +170,6 @@
 }
 
 @media (min-width: 35em) {
-    .primary-header { 
-        height: 17vh;
-        column-gap: 5vw;
-        padding-top: 1vw;
-
-        & .logo {
-            width: 37vw;
-            max-height: 100%;
-        }
-
-        & .mobile-nav-toggle {
-            display: none;
-        }
-
-        & .primary-navigation {
-            gap: 2vw;
-            max-height: 100%;
-            text-align: center;
-            transform: translateX(0%);
-            flex-direction: row;
-            inset: unset;
-            position:unset;
-
-            & > :nth-child(2) {
-                display: flex;
-                & span {
-                    background-color: hsl(var(--clr-white));
-                    border-radius: 0.5rem;
-                    width: 0.2rem;
-                    height: 70%;
-                }
-            }
-
-            & li {
-                & a {
-                    font-size: max(2.7rem, 2vw);
-                }
-            }
-
-
-        }
-
-        & .underline-indicators > *:not(:nth-child(2)) {
-            cursor: pointer;
-            border: 0;
-            border-bottom: .2rem solid hsl(var(--clr-black) / 0);
-        }
-    
-        .underline-indicators > *:hover,
-        .underline-indicators > *:focus {
-            border-color: hsl(var(--clr-white) / 0.5); 
-        }
-    
-        .underline-indicators > .active,
-        .underline-indicators > [aria-selected="true"] {
-            color: hsl(var(--clr-white));
-            border-color: hsl(var(--clr-white));
-        }
-    }
-
     // .hero-section {
     //     & .text-section {
     //         & h1 {
@@ -358,21 +214,6 @@
 }
 
 @media (min-width: 60em) {
-    .primary-header {
-        align-items: flex-start;
-        & .logo {
-            width: max(180px, 25vw);
-        }
-
-        & .primary-navigation {
-            gap: 4vw;
-            padding-right: 2vw;
-
-            & li a {
-                font-size: max(1.5rem, 2vw);
-            }
-        }
-    }
     .hero-section {
         @include background-image($url: "../../assets/heroImg2.jpg", $position: 47% center);
         

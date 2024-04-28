@@ -1,0 +1,47 @@
+@use '../../abstracts' as *;
+
+.modal-calendar {
+
+    &__calendar {
+        max-height: 80vh;
+        overflow-y: auto;
+    
+        & .my-selected:not([disabled]) { 
+            font-weight: bold;
+            color: hsl(var(--clr-white) / 1);
+            background-color: hsl(var(--clr-red) / 1);
+        }
+    
+        & .my-selected:hover:not([disabled]) { 
+            border-color: hsl(var(--clr-black) / .8);
+        }
+        
+        & .rdp-button:hover:not([disabled]):not(.rdp-day_selected, .my-selected) {
+            background-color: hsl(var(--clr-red) / .6);
+        }
+    
+        & .rdp-button:hover:not([disabled]):not(.rdp-day_selected) {
+            background-color: hsl(var(--clr-red) / 1);
+        }
+        
+        & .rdp-months {
+            flex-direction: column;
+
+            @include mq(large) {
+                flex-direction: row;
+            }
+        }
+        
+        & .rdp-caption_label, .rdp-head_cell {
+            font-family: var(--ff-cambai);
+        }
+        
+        & .rdp-weeknumber, .rdp-day, .rdp-head_cell {
+            font-size: 1rem;
+        }
+
+        & .rdp-day {
+            font-family: var(--ff-montserrat);
+        }
+    }
+};

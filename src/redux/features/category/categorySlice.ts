@@ -1,71 +1,18 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { IImage } from "../tour/tourSlice.interface";
-import categoryService from "../../../services/categoryService";
-import { toast } from 'react-toastify';
+import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../../store";
+import addCommonAsyncThunksMatchers from "../../utils/addCommonAsyncThunksMatchers";
+import categoryThunks from "./categoryThunks";
+import { CreateCategoryAction, DeleteCategoryAction, GetAllCategoriesAction, GetCategoryAction, ICategoryState, UpdateCategoryAction } from "./categorySlice.interface";
 
-export interface ICategory {
-    title: string,
-    icon: IImage,
-    slug: string,
-};
+const { getAllCategories, createCategory, updateCategory, deleteCategory, getCategory} = categoryThunks;
 
-export interface ICategoryState {
-    categories: ICategory[],
-    isError: boolean,
-    errorMessage: string,
-    isSuccess: boolean,
-    isLoading: boolean,
-};
-
-export const createCategory = createAsyncThunk(
-    'categories/create',
-    async (categoryData: Omit<ICategory, 'slug'>, thunkAPI) => {
-        try {
-            return await categoryService.createCategory(categoryData);
-        } catch (error: any) {
-            const message = 
-            ( error.response && error.response.data && error.response.data.message) || error.message || error.toString();
-            console.log(message);
-            return thunkAPI.rejectWithValue(message);
-        }
-    }
-);
-
-export const updateCategory = createAsyncThunk(
-    'categories/update',
-    async ({slug, categoryData}: {slug: string, categoryData: Partial<ICategory>}, thunkAPI) => {
-        try {
-            return await categoryService.updateCategory(slug, categoryData);
-        } catch (error: any) {
-            const message = 
-            ( error.response && error.response.data && error.response.data.message) || error.message || error.toString();
-            console.log(message);
-            return thunkAPI.rejectWithValue(message);
-        }
-    }
-);
-
-export const deleteCategory = createAsyncThunk(
-    'categories/delete',
-    async (slug: string, thunkAPI) => {
-        try {
-            return await categoryService.deleteCategory(slug);
-        } catch (error: any) {
-            const message = 
-            ( error.response && error.response.data && error.response.data.message) || error.message || error.toString();
-            console.log(message);
-            return thunkAPI.rejectWithValue(message);
-        }
-    }
-);
-
-const initialState: ICategoryState = {
+export const initialState: ICategoryState = {
     categories: [],
+    category: null,
     isError: false,
     errorMessage: '',
     isSuccess: false,
-    isLoading: false,
+    fetched: false,
 };
 
 const categorySlice = createSlice({
@@ -74,55 +21,36 @@ const categorySlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder
-        .addCase(createCategory.fulfilled, (state, action) => {
-            state.categories.push(action.payload);
+        .addCase(getAllCategories.fulfilled, (state, action: GetAllCategoriesAction) => {
+            state.categories = action.payload.data;
+            state.fetched = true;
         })
-        .addCase(updateCategory.fulfilled, (state, action) => {
-            const { slug } = action.payload;
+        .addCase(getCategory.fulfilled, (state, action: GetCategoryAction) => {
+            state.category = action.payload.data;
+            state.fetched = true;
+        })
+        .addCase(createCategory.fulfilled, (state, action: CreateCategoryAction) => {
+            state.categories.push(action.payload.data);
+        })
+        .addCase(updateCategory.fulfilled, (state, action: UpdateCategoryAction) => {
+            const { slug } = action.payload.data;
             state.categories = state.categories.map(category => {
                 if (category.slug === slug) {
                 return {
-                    ...action.payload
+                    ...action.payload.data
                 };
                 }
                 return category;
             });
         })
-        .addCase(deleteCategory.fulfilled, (state, action) => {
-            const { slug } = action.payload;
+        .addCase(deleteCategory.fulfilled, (state, action: DeleteCategoryAction) => {
+            const { slug } = action.payload.data;
             state.categories = state.categories.filter(category => category.slug === slug);
         })
-        .addMatcher(
-            (action) =>
-            action.type.endsWith("/pending") && action.type.includes("categories/"),
-            (state) => {
-            state.isLoading = true;
-            }
-        )
-        .addMatcher(
-            (action) =>
-            action.type.endsWith("/fulfilled") && action.type.includes("categories/"),
-            (state, action) => {
-            state.isLoading = false;
-            state.isSuccess = true;
-            state.isError = false;
-            toast.success("Operation completed successfully");
-            }
-        )
-        .addMatcher(
-            (action) =>
-            action.type.endsWith("/rejected") && action.type.includes("categories/"),
-            (state, action) => {
-            state.isLoading = false;
-            state.isError = true;
-            state.errorMessage = action.payload;
-            toast.error(`${action.payload}`);
-            }
-        )
+        addCommonAsyncThunksMatchers<ICategoryState>(builder, 'categories/')
     }
 });
 
-export const selectIsLoading = (state: RootState) => state.category.isLoading;
-export const selectCategories = (state: RootState) => state.category.categories;
+export const selectCategoryState = (state: RootState) =>  state.category;
 
 export default categorySlice.reducer;

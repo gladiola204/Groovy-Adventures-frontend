@@ -1,0 +1,33 @@
+@use '../abstracts/mixins' as *;
+
+.flex-row {
+    @include flex();
+
+    &--space-around {
+        justify-content: space-around;
+    }
+
+    &--flex-start {
+        justify-content: flex-start;
+    }
+
+    &--small-gap {
+        column-gap: 1rem;
+    }
+
+    &--stretch {
+        align-items: stretch;
+    }
+}
+
+.flex-column {
+    @include flex($direction: column);
+
+    &--space-around {
+        justify-content: space-around;
+    }
+
+    &--align-left {
+        align-items: flex-start;
+    }
+}

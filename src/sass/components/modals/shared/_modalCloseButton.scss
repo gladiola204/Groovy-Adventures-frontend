@@ -1,0 +1,23 @@
+@use '../../../abstracts' as *;
+
+.close-button {
+    position: fixed;
+    top: 10px;
+    right: 20px;
+    display: block;
+    
+    background-color: transparent;
+    border: none;
+
+    @include mq(large) {
+        top: 1.5vh;
+        position: absolute;
+        transition: scale 300ms ease-in-out;
+
+        &:hover {
+            scale: 1.2;
+            border: none;
+        }
+    }
+    
+}

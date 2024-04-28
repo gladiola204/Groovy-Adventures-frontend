@@ -1,0 +1,114 @@
+@use '../abstracts' as *;
+
+.reservation-card {
+    position: sticky;
+    top: 12vh;
+    width: 30vw;
+    grid-column: 2 / 3;
+    grid-row: 1 / -1;
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 1vw;
+
+    border-radius: 20px;
+    border: 1px solid hsl(var(--clr-black) / 0.3);
+    padding: 2vh 2vw;
+    box-shadow: var(--shadow-basic);
+
+    &__header {
+        font-size: 1.5rem;
+    }
+
+    &__rating {
+        grid-row: 2 / 3;
+        @include flex($justify: flex-start);
+    }
+
+    &__star {
+    }
+
+    &__rate {
+
+    }
+
+    &__form {
+        grid-column: 1 / -1;
+        @include flex($direction: column, $gap: 1vw);
+        margin-bottom: 2vw;
+    }
+
+    &__wrapper-inputs {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+
+        border-radius: 20px;
+        border: 1px solid hsl(var(--clr-black) / 0.5);
+    }
+
+    &__date {
+        grid-column: 1 / -1;
+
+        padding: 0.5vw 1vw 1vw 1vw;
+        border-top: 1px solid hsl(var(--clr-black) / 0.5);
+    }
+
+    &__people {
+        padding: 1vw 1vw 0.5vw 1vw;
+        border: none;
+
+        background-color: transparent;
+        text-align: left;
+    }
+
+    &__from {
+        padding: 1vw 0.5vw 0.5vw 1vw;
+        border-right: 1px solid hsl(var(--clr-black) / 0.5);
+    }
+
+    &__selector {
+        border: none;
+        outline: none;
+        width: 100%;
+    }
+
+    &__reserve-btn {
+        grid-column: 1 / -1;
+        width: 100%;
+        border-radius: 20px;
+        border: none;
+        font-family: var(--ff-hippie);
+        font-size: 1.5rem;
+        color: hsl(var(--clr-white) / 1);
+        background-color: hsl(var(--clr-coffee) / 0.7);
+        background-image: linear-gradient(90deg, hsl(var(--clr-coffee) / 0.8) 0%, hsl(var(--clr-black) / 0.5) 100%);
+        text-shadow: 
+            -0.10em -0.10em 0px hsl(var(--clr-black)),
+            0.10em -0.10em 0px hsl(var(--clr-black)),
+            -0.10em 0.10em 0px hsl(var(--clr-black)),
+            0.10em 0.10em 0px hsl(var(--clr-black));
+        padding: 0.8vw;
+
+        @include animated-button();
+    }
+
+    &__payment-info {
+        grid-column: 1 / -1;
+    }
+
+    &__cost-title {
+        justify-self: start;
+    }
+
+    &__cost {
+        justify-self: end;
+    }
+
+    &__total {
+        justify-self: start;
+    }
+
+    &__total-price {
+        justify-self: end;
+    }
+}

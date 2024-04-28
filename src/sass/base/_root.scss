@@ -5,59 +5,42 @@
     --clr-black: 0 0% 0%;
     --clr-white: 0 0% 100%;
     --clr-orange: 30 53% 50%;
+    --clr-red: 0 65% 45%;
+    --clr-coffee: 25 34% 33%;
+    --clr-gray: 0 0% 55%;
 
     /* Font-families  */
     --ff-hippie: Hippie;
     --ff-cambai: Cambai;
+    --ff-montserrat: 'Montserrat Alternates', sans-serif;
+
+    /////  Margins /////
+    --mg-small: 1rem;
+
+    /////  Border //////
+    --border-pill: 100px;
+
+    /////  Box shadow /////
+    --shadow-basic: 0px 0px 19px 5px hsl(var(--clr-black) / 0.3);
+    --shadow-btn: 0px 0.7rem 1.4rem 0px hsl(var(--clr-black) / .7);
 
     @each $screen-size, $font-size in $type-scale {
-        @if $screen-size == mobileS {
+        @if $screen-size == small {
             @each $size, $value in $font-size {
                 --fs-#{$size}: #{$value};
             }
-        // } @else if $screen-size == medium {
-        //    @include mq(medium) {
-        //         @each $size, $value in $font-size {
-        //             --fs-#{$size}: #{$value};
-        //         }
-        //    }
-        // } @else {
-        //     @include mq(large) {
-        //         @each $size, $value in $font-size {
-        //             --fs-#{$size}: #{$value};
-        //         }
-        //    }
-        // }
-        } @else if $screen-size == mobileM {
-            @include mq(mobileM) {
+        } @else if $screen-size == medium {
+           @include mq(medium) {
                 @each $size, $value in $font-size {
                     --fs-#{$size}: #{$value};
                 }
-            }
-        } @else if $screen-size == mobileL {
-            @include mq(mobileL) {
+           }
+        } @else {
+            @include mq(large) {
                 @each $size, $value in $font-size {
                     --fs-#{$size}: #{$value};
                 }
-            }
-        } @else if $screen-size == tablet {
-            @include mq(tablet) {
-                @each $size, $value in $font-size {
-                    --fs-#{$size}: #{$value};
-                }
-            }
-        } @else if $screen-size == laptop {
-            @include mq(laptop) {
-                @each $size, $value in $font-size {
-                    --fs-#{$size}: #{$value};
-                }
-            }
-        } @else if $screen-size == laptopL {
-            @include mq(laptopL) {
-                @each $size, $value in $font-size {
-                    --fs-#{$size}: #{$value};
-                }
-            }
+           }
         }
     }
 }
