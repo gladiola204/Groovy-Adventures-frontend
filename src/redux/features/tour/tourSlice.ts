@@ -22,7 +22,7 @@ const tourSlice = createSlice({
     initialState,
     reducers: {
         ADD_TO_BASKET(state, action: AddToBasketAction) {
-            state.basket = [...state.basket, action.payload];
+            state.basket = [...state.basket, ...action.payload];
             localStorage.setItem('basket', JSON.stringify(state.basket));
         },
         REMOVE_FROM_BASKET(state, action: RemoveFromBasketAction) {

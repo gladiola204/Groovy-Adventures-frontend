@@ -1,4 +1,3 @@
-import { toast } from "react-toastify";
 import { request } from "./axios";
 
 const API_URL = `/api/admin`;

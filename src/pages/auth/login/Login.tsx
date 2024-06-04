@@ -7,12 +7,14 @@ import useFormFieldErrors from "../../../hooks/useFormFieldErrors";
 import validateFormData from "../../admin/helpers/validateFormData";
 import loginValidationSchema from "./loginValidationSchema";
 import authThunks from "../../../redux/features/auth/authThunks";
+import useGlobalIsLoading from "../../../hooks/useGlobalIsLoading";
 
 const Login: React.FC = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const dispatch = useAppDispatch();
-    const { isSuccess, isLoading } = useAppSelector(selectAuthState);
+    const { isSuccess } = useAppSelector(selectAuthState);
+    const isLoading = useGlobalIsLoading();
     const navigate = useNavigate();
     const { setError } = useFormFieldErrors();
 
@@ -30,7 +32,7 @@ const Login: React.FC = () => {
 
     useEffect(() => {
         if(isSuccess && !isLoading) {
-            navigate('/search')
+            navigate(-1);
         }
     }, [isSuccess, isLoading])
 

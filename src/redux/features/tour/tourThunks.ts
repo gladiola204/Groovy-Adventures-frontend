@@ -1,5 +1,4 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { ReviewDoc } from "./tourSlice.interface";
 import tourService, { CreateReviewData, INewTour, IUpdateTour } from "../../../services/tourService";
 import parseAxiosError from "../../utils/parseAxiosError";
 
@@ -19,10 +18,7 @@ const createTour = createAsyncThunk(
         try {
             return await tourService.createNewTour(tourData)
         } catch (error: any) {
-            const message = 
-            ( error.response && error.response.data && error.response.data.message) || error.message || error.toString();
-            console.log(message);
-            return thunkAPI.rejectWithValue(message);
+            return thunkAPI.rejectWithValue(parseAxiosError(error));
         }
     }
 )
@@ -33,10 +29,7 @@ const deleteTour = createAsyncThunk(
         try {
             return await tourService.deleteTour(slug);
         } catch (error: any) {
-            const message = 
-            ( error.response && error.response.data && error.response.data.message) || error.message || error.toString();
-            console.log(message);
-            return thunkAPI.rejectWithValue(message);
+            return thunkAPI.rejectWithValue(parseAxiosError(error));
         }
     }
 );
@@ -58,10 +51,7 @@ const getTours = createAsyncThunk(
         try {
             return await tourService.getTours(tourIds);
         } catch (error: any) {
-            const message = 
-            ( error.response && error.response.data && error.response.data.message) || error.message || error.toString();
-            console.log(message);
-            return thunkAPI.rejectWithValue(message);
+            return thunkAPI.rejectWithValue(parseAxiosError(error));
         }
     }
 );
@@ -72,10 +62,7 @@ const filterTours = createAsyncThunk(
         try {
             return await tourService.filterTours(tourFilters);
         } catch (error: any) {
-            const message = 
-            ( error.response && error.response.data && error.response.data.message) || error.message || error.toString();
-            console.log(message);
-            return thunkAPI.rejectWithValue(message);
+            return thunkAPI.rejectWithValue(parseAxiosError(error));
         }
     }
 )
@@ -86,13 +73,24 @@ const updateTour = createAsyncThunk(
         try {
             return await tourService.updateTour(slug, tourData);
         } catch (error: any) {
-            const message = 
-            ( error.response && error.response.data && error.response.data.message) || error.message || error.toString();
-            console.log(message);
-            return thunkAPI.rejectWithValue(message);
+            return thunkAPI.rejectWithValue(parseAxiosError(error));
         }
     }
 );
+
+
+// DESTINATIONS
+const getDestinations = createAsyncThunk(
+    'tours/getDestinations',
+    async (destinationName: string, thunkAPI) => {
+        try {
+            return await tourService.getDestinations(destinationName);
+        } catch (error: any) {
+            return thunkAPI.rejectWithValue(parseAxiosError(error));
+        }
+    }
+
+)
 
 const createReview = createAsyncThunk(
     "tours/createReview",
@@ -100,10 +98,7 @@ const createReview = createAsyncThunk(
         try {
             return await tourService.createReview(tourData);
         } catch (error: any) {
-            const message = 
-            ( error.response && error.response.data && error.response.data.message) || error.message || error.toString();
-            console.log(message);
-            return thunkAPI.rejectWithValue(message);
+            return thunkAPI.rejectWithValue(parseAxiosError(error));
         }
     }
 )
@@ -114,10 +109,7 @@ const deleteReview = createAsyncThunk(
         try {
             return await tourService.deleteReview(_id);
         } catch (error: any) {
-            const message = 
-            ( error.response && error.response.data && error.response.data.message) || error.message || error.toString();
-            console.log(message);
-            return thunkAPI.rejectWithValue(message);
+            return thunkAPI.rejectWithValue(parseAxiosError(error));
         }
     }
 )
@@ -129,6 +121,7 @@ const tourThunks = {
     getTour,
     getTours,
     filterTours,
+    getDestinations,
     createReview,
     deleteReview
 }

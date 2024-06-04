@@ -21,25 +21,28 @@ export type ReviewDoc =  {
     updatedAt: Date,
 };
 
+export type IDiscount = {
+    isDiscounted: boolean;
+    percentageOfDiscount?: number;
+    expiresAt?: string;
+};
+
 export type ISchedule = {
     id: string,
     startDate: string,
     endDate: string,
     availability: number,
     price: number,
-    discount: {
-        isDiscounted: boolean;
-        percentageOfDiscount: number;
-        expiresAt: string;
-    };
+    discount: IDiscount;
 }
+export type IScheduleAttrs = Omit<ISchedule,'id'>;
 
 export type DailyItineraryDescription = {
     day: number,
     listOfActivities: string[],
 }[];
 
-export type Features = {
+export type IFeatures = {
     firstFeature: string,
     secondFeature: string,
     thirdFeature: string,
@@ -66,6 +69,23 @@ export interface Image {
     differentSizes: DifferentSizes,
 }
 
+export interface IDestination {
+    name: string,
+    place_id: string,
+    input_id: string,
+}
+export interface IDestinationAttrs {
+    name: string,
+    place_id: string,
+}
+
+export interface IDestinationDoc {
+    id: string,
+    name: string,
+    place_id: string,
+    numberOfTours: number,
+}
+
 export interface ITour {
     id: string,
     title: string,
@@ -79,8 +99,8 @@ export interface ITour {
     averagePartialRating: PartialRatings,
     purchasesCount: number;
     slug: string,
-    features: Features,
-    destinations: string[]
+    features: IFeatures,
+    destinations: IDestinationDoc[]
 }
 
 export type IBasket = ITourInBasket[];
@@ -99,7 +119,7 @@ export interface ITourState extends CommonAsyncState {
     filteredTours: ITour[],
     tours: ITour[],
     hasMoreFilteredTours: boolean,
-    basket: IBasket | [],
+    basket: IBasket,
 };
 
 
@@ -116,7 +136,7 @@ export interface RemoveFromBasketAction {
 }
 
 export interface SetBasketAction {
-    payload: IBasket[],
+    payload: IBasket,
     type: string,
 }
 

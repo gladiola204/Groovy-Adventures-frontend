@@ -2,7 +2,7 @@ import '../../sass/main.scss';
 import { IoIosArrowDropdown as ArrowIcon } from 'react-icons/io';
 import NavItem from './components/NavItem';
 import CategoriesModal from '../../components/modals/CategoriesModal';
-import useModalState from '../../hooks/useModalState';
+import useModalState, { ModalType } from '../../hooks/useModalState';
 import clsx from 'clsx';
 import HamburgerMenu from './components/HamburgerMenu';
 import LoginNavItem from './components/LoginNavItem';
@@ -21,7 +21,7 @@ const SearchPageHeader: React.FC = () => {
     const categoriesNavItem = (
         <NavItem colorVersion={colorVariant}>
             <>
-                <button className='flex-row flex-row--small-gap header__button' onClick={() => handleOpenModal('categories')}>
+                <button className='flex-row flex-row--small-gap header__button' onClick={() => handleOpenModal(ModalType.Categories)}>
                     <h3 className='header__categories'>Categories</h3>
                     <div className='flex-row'>
                         <ArrowIcon className={clsx('header__arrow', {

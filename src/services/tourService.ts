@@ -1,4 +1,4 @@
-import { DailyItineraryDescription, Features, Image, PartialRatings, ReviewDoc, Schedule} from "../redux/features/tour/tourSlice.interface";
+import { DailyItineraryDescription, IFeatures, ISchedule, IDestinationAttrs, IScheduleAttrs} from "../redux/features/tour/tourSlice.interface";
 import { request } from "./axios";
 import toFormData from "./utils/toFormData";
 
@@ -10,13 +10,11 @@ export interface INewTour {
     generalDescription: string,
     dailyItineraryDescription: DailyItineraryDescription,
     category: string,
-    schedule: ScheduleWithoutId[],
+    schedule: IScheduleAttrs[],
     images: File[],
-    features: Features,
-    destinations: string[],
+    features: IFeatures,
+    destinations: IDestinationAttrs[],
 };
-
-export type ScheduleWithoutId = Omit<Schedule, 'id'>;
 
 export interface IUpdateTour {
     title?: string,
@@ -24,11 +22,12 @@ export interface IUpdateTour {
     generalDescription?: string,
     dailyItineraryDescription?: DailyItineraryDescription,
     removeImages?: string[],
-    updateSchedule?: Schedule[],
-    newSchedule?: ScheduleWithoutId[],
+    updateSchedule?: ISchedule[],
+    newSchedule?:IScheduleAttrs[],
     deleteSchedule?: string[],
-    features?: Features,
-    destinations?: string[],
+    features?: IFeatures,
+    newDestinations?: IDestinationAttrs[],
+    removeDestinations?: string[],
     images?: File[],
 }
 
@@ -88,6 +87,12 @@ async function updateTour(slug: string, tourData: IUpdateTour) {
     return { data: response.data, showSuccessToast: true };
 };
 
+// DESTINATIONS
+async function getDestinations(destinationName: string) {
+    const response = await request.get(API_URL + destinationName);
+    return { data: response.data, showSuccessToast: false };
+}
+
 async function createReview({slug, reviewData}: { slug: string, reviewData: CreateReviewData}) {
     const response = await request.post(`${API_URL}${slug}/reviews`, reviewData);
     return { data: response.data, showSuccessToast: true };
@@ -105,6 +110,7 @@ const tourService = {
     getTour,
     filterTours,
     getTours,
+    getDestinations,
     createReview,
     deleteReview,
 };

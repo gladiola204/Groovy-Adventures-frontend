@@ -2,6 +2,7 @@
 interface Props {
     msg: string,
     className?: string,
+    //message?: JSX.Element | JSX.Element[]
 }
 
 const ErrorMessage: React.FC<Props> = ({ msg, className }) => {

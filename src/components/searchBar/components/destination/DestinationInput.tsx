@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
-import { Desktop, TabletAndBelow } from "../../../utils/mediaQueries";
-import useModalState, { ModalType } from "../../../hooks/useModalState";
-import useDestinationState from "../hooks/useDestinationState";
+import { Desktop, TabletAndBelow } from "../../../../utils/mediaQueries";
+import useModalState, { ModalType } from "../../../../hooks/useModalState";
+import useDestinationState from "../../hooks/useDestinationState";
 import DestinationModal from "./DestinationModal";
 
 interface Props {

@@ -11,9 +11,9 @@ function useAdminAccessGuard(path: string) {
     
     useEffect(() => {
         async function adminAccessGuard() {
-            const status = await adminService.getAdminStatus();
+            const { data } = await adminService.getAdminStatus();
             
-            if(status !== 401) {
+            if(data !== 401) {
                 dispatch(SET_LOGIN(true));
                 dispatch(SET_ADMIN(true))
                 return;

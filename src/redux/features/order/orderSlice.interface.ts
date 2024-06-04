@@ -1,5 +1,5 @@
 import { CommonAction, CommonAsyncState } from "../../utils/types";
-import { Schedule } from "../tour/tourSlice.interface";
+import { ISchedule } from "../tour/tourSlice.interface";
 
 export enum OrderStatus {
     Created = "created",
@@ -9,7 +9,7 @@ export enum OrderStatus {
 };
 
 export type OrderSchedule = {
-    doc: Schedule, numberOfParticipants: number
+    doc: ISchedule, numberOfParticipants: number
 }
 
 export interface IOrder {

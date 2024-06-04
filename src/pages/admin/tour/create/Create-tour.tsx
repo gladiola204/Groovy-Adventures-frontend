@@ -1,7 +1,7 @@
 import useAdminAccessGuard from "../../../../hooks/useAdminAccessGuard";
 import 'react-quill/dist/quill.snow.css';
 import createTourValidationSchema from "./createTourValidationSchema";
-import GenerateTourForm, { FormTourData } from "../generateTourForm";
+import GenerateTourForm, { FormTourData } from "../generateTourForm/generateTourForm";
 import useAppDispatch from "../../../../hooks/useAppDispatch";
 import useFormFieldErrors from "../../../../hooks/useFormFieldErrors";
 import validateFormData from "../../helpers/validateFormData";

@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import useImageUpload from "../../../hooks/useImageUpload";
+import useImageUpload from "../../../hooks/useImageState";
 import useAppSelector from "../../../hooks/useAppSelector";
 import { RootState } from "../../../redux/store";
+import { selectCategoryState } from "../../../redux/features/category/categorySlice";
 
 interface Props {
     handleSubmit: (formData: CategoryFormData) => Promise<void>,
@@ -15,9 +16,9 @@ export interface CategoryFormData {
 }
 
 const GenerateCategoryForm: React.FC<Props> = ({ handleSubmit, goal, handleRemoveCategory }) => {
-    const { category, isLoading, isError, errorMessage, isSuccess } = useAppSelector((state: RootState) => state.category);
+    const { category, isError, isSuccess } = useAppSelector(selectCategoryState);
     const [title, setTitle] = useState('');
-    const { selectedImages, resetAndUploadImages } = useImageUpload();
+    const { selectedImages, resetAndAddImg } = useImageUpload();
     const showImagesThumbnail = () => selectedImages.map(img => <img src={img.preview} style={{ width: "100px" }}/>);
 
     useEffect(() => {
@@ -47,7 +48,7 @@ const GenerateCategoryForm: React.FC<Props> = ({ handleSubmit, goal, handleRemov
                 <input
                     type="file"
                     accept="image/*"
-                    onChange={(e) => resetAndUploadImages(e.target.files)}
+                    onChange={(e) => resetAndAddImg(e.target.files)}
                 />
 
                 {showImagesThumbnail()}

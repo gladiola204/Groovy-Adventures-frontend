@@ -11,7 +11,7 @@ import dayjs from 'dayjs';
 //     return `${day}-${month}-${year}`;
 // };
 
-export const formatDate = (date: Date, format = 'DD-MM-YYYY') => {
+export const formatDate = (date: Date, format?: string) => {
     // if (!(date instanceof Date)) {
     //   console.error('Podano nieprawidłowy obiekt Date.');
     //   return null;

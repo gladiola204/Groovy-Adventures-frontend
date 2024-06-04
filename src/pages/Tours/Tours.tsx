@@ -7,7 +7,7 @@ import Header from "../../layouts/header/Header";
 import { useLocation } from "react-router-dom";
 import qs from 'qs';
 import tourThunks from "../../redux/features/tour/tourThunks";
-import '../sass/main.scss';
+import '../../sass/main.scss';
 import { selectTourState } from "../../redux/features/tour/tourSlice";
 import CategoriesList from "../../layouts/CategoriesList";
 

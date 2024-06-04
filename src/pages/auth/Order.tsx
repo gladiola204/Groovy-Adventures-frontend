@@ -6,7 +6,6 @@ import { useParams } from "react-router-dom";
 import { isIOrder } from "../Payment";
 import orderThunks from "../../redux/features/order/orderThunks";
 import { IOrder } from "../../redux/features/order/orderSlice.interface";
-import LoadingCircle from "../../components/LoadingSpinner";
 import ErrorMessage from "../../components/ErrorMessage";
 import useRedirectLoggedOutUser from "../../hooks/useRedirectLoggedOutUser";
   
@@ -17,7 +16,7 @@ interface Props {
 const Order: React.FC<Props> = ({ forwardedOrder }) => {
     useRedirectLoggedOutUser('/login');
     const dispatch = useAppDispatch();
-    const { isLoading, order, isError, errorMessage} = useAppSelector(selectOrderState)
+    const { order, isError, errorMessage} = useAppSelector(selectOrderState)
     const { orderId } = useParams();
     const [orderState, setOrderState] = useState<IOrder>();
 
@@ -29,11 +28,12 @@ const Order: React.FC<Props> = ({ forwardedOrder }) => {
         } else if (orderId) {
             dispatch(orderThunks.getOrder(orderId));
         }
+
     }, [orderId, forwardedOrder, order, dispatch]);
 
     return(
         <div>
-            {orderState &&
+            {orderState ?
                 <>
                     {orderState.id}
                     {orderState.status}
@@ -46,6 +46,7 @@ const Order: React.FC<Props> = ({ forwardedOrder }) => {
                         </div>
                     ))}
                 </>
+                : <ErrorMessage msg="Order not found"/>
             }
         </div>
     )

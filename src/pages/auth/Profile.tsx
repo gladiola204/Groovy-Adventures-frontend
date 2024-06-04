@@ -1,25 +1,11 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import useRedirectLoggedOutUser from "../../hooks/useRedirectLoggedOutUser";
-import useAppDispatch from "../../hooks/useAppDispatch";
-import { selectAuthState } from "../../redux/features/auth/authSlice";
-import useAppSelector from "../../hooks/useAppSelector";
 import { Link } from "react-router-dom";
-import ErrorMessage from "../../components/ErrorMessage";
-import LoadingCircle from "../../components/LoadingSpinner";
+import ChangePassword from "./ChangePassword";
 
 const Profile: React.FC = () => {
     useRedirectLoggedOutUser('/login');
-    const dispatch = useAppDispatch();
-    const { isLoading, isSuccess, errorMessage} = useAppSelector(selectAuthState);
-    const [currentPassword, setCurrentPassword] = useState('');
-    const [newPassword, setNewPassword] = useState('');
-
-    useEffect(() => {
-        if(!isLoading && isSuccess) {
-            setCurrentPassword('');
-            setNewPassword('');
-        };
-    }, [isLoading, isSuccess, dispatch]);
+    const [isChangePasswordFormOpened, setIsChangePasswordFormOpened] = useState(false);
         
     return(
         <div>
@@ -31,7 +17,12 @@ const Profile: React.FC = () => {
                     <Link to='/profile/orders'>Orders</Link>
                 </li>
                 <li>
-                    <button>Change Password</button>
+                    <button onClick={e => setIsChangePasswordFormOpened(true)}>Change Password</button>
+
+                    {isChangePasswordFormOpened ?
+                        <ChangePassword />
+                        : null
+                    }
                 </li>
             </ul>
         </div>

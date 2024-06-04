@@ -1,7 +1,7 @@
 import NavItem from "./NavItem";
-import userIconBlack from '../../assets/userIcon-black.svg';
-import userIconWhite from '../../assets/userIcon-white.svg';
-import useModalState from "../../../hooks/useModalState";
+import userIconBlack from '../../../assets/userIcon-black.svg';
+import userIconWhite from '../../../assets/userIcon-white.svg';
+import useModalState, { ModalType } from "../../../hooks/useModalState";
 import LoginModal from "../../../components/modals/LoginModal";
 
 interface Props {
@@ -16,11 +16,11 @@ const LoginNavItem: React.FC<Props> = ({ colorVariant }) => {
     return(
         <NavItem colorVersion={colorVariant} blockPadding={false}>
             <>
-                <button className='flex-column header__button' onClick={() => handleOpenModal('login')}>
+                <button className='flex-column header__button' onClick={() => handleOpenModal(ModalType.Login)}>
                     <img src={userIcon} aria-hidden='true' className='header__user-icon'/>
                     
                 </button>
-                <LoginModal isModalOpen={openedModal === 'login'} closeModal={handleCloseModal}/>
+                <LoginModal isModalOpen={openedModal === ModalType.Login} closeModal={handleCloseModal}/>
             </>
         </NavItem> 
     )

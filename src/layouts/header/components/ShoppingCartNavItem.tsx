@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 import { Desktop, TabletAndBelow } from "../../../utils/mediaQueries";
 import NavItem from "./NavItem";
-import shoppingCartIcon from '../../assets/bacpack-icon.svg';
-import useModalState from "../../../hooks/useModalState";
+import shoppingCartIcon from '../../../assets/bacpack-icon.svg';
+import useModalState, { ModalType } from "../../../hooks/useModalState";
 
 interface Props {
     colorVariant: 'black' | 'white';
@@ -16,7 +16,7 @@ const ShoppingCartNavItem: React.FC<Props> = ({ colorVariant }) => {
         <NavItem colorVersion={colorVariant} blockPadding={false}>
             <>
                 <Desktop>
-                    <button className='flex-column header__button' onClick={() => handleOpenModal('shopping-cart')}>
+                    <button className='flex-column header__button' onClick={() => handleOpenModal(ModalType.ShoppingCart)}>
                         {renderShoppingCartIcon}
                     </button>
                 </Desktop>

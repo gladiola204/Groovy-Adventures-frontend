@@ -1,6 +1,6 @@
 import { DayPicker } from 'react-day-picker';
 import 'react-day-picker/dist/style.css';
-import '../../sass/main.scss';
+import '../../../sass/main.scss';
 import ModalNextSection from '../../modals/shared/ModalNextSection';
 import ReactModal from '../../modals/shared/ReactModal';
 import useModalState, { ModalType } from '../../../hooks/useModalState';

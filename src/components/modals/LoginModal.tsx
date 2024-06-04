@@ -24,7 +24,6 @@ const LoginModal: React.FC<Props> = ({ isModalOpen, closeModal }) => {
     const [activeLabel, setActiveLabel] = useState<ActiveLabel>('signup');
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
-    const { user, isLoading, isError, errorMessage } = useAppSelector((state: RootState) => state.auth);
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;

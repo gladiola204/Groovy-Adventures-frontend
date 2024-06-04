@@ -7,7 +7,7 @@ import { ToastContainer } from 'react-toastify';
 import { useEffect } from 'react';
 import { SET_TOKEN, SET_USER } from './redux/features/auth/authSlice';
 import useAppDispatch from './hooks/useAppDispatch';
-import { IBasket, SET_BASKET, selectBasket } from './redux/features/tour/tourSlice';
+import { SET_BASKET, selectTourState } from './redux/features/tour/tourSlice';
 import Basket from './pages/basket/Basket';
 import useAppSelector from './hooks/useAppSelector';
 import Payment from './pages/Payment';
@@ -23,11 +23,12 @@ import UpdateCategory from './pages/admin/category/update/UpdateCategory';
 import Register from './pages/auth/register/Register';
 import LoadingCircle from './components/LoadingSpinner';
 import { selectIsLoading } from './redux/features/loadingSlice';
+import { IBasket } from './redux/features/tour/tourSlice.interface';
 
 
 const App: React.FC = () =>  {
   const dispatch = useAppDispatch();
-  const basket = useAppSelector(selectBasket);
+  const { basket } = useAppSelector(selectTourState);
   const isLoading = useAppSelector(selectIsLoading)
 
   useEffect(() => {
@@ -44,7 +45,7 @@ const App: React.FC = () =>  {
     };
 
     if(storedBasket && basket.length === 0) {
-      const parsedBasket: IBasket[] = JSON.parse(storedBasket);
+      const parsedBasket: IBasket = JSON.parse(storedBasket);
 
       dispatch(SET_BASKET(parsedBasket));
     }

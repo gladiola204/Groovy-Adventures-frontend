@@ -10,6 +10,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.4.0",
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@fullpage/react-fullpage": "^0.1.40",
+    "@googlemaps/js-api-loader": "^1.16.6",
     "@reduxjs/toolkit": "^1.9.5",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -93,6 +94,7 @@
   "devDependencies": {
     "@types/draft-js": "^0.11.17",
     "@types/fullpage.js": "^2.9.3",
+    "@types/googlemaps": "^3.43.3",
     "@types/react-datepicker": "^4.11.2",
     "@types/react-image-gallery": "^1.2.0",
     "@types/react-modal": "^3.16.0",

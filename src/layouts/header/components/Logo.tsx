@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import logoBlack from '../../assets/groovyAdventuresIcon-black.svg';
-import logoWhite from '../../assets/GroovyAdventuresIcon-white.svg';
+import logoBlack from '../../../assets/groovyAdventuresIcon-black.svg';
+import logoWhite from '../../../assets/GroovyAdventuresIcon-white.svg';
 
 interface Props {
     colorVariant: 'black' | 'white'

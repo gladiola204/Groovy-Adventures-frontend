@@ -5,8 +5,8 @@ import "react-image-gallery/styles/scss/image-gallery.scss";
 import { useState } from 'react';
 import CounterTravellersModal from '../../../../components/searchBar/components/CounterTravellersModal';
 import useAppDispatch from '../../../../hooks/useAppDispatch';
-import useCounterTravellersState from '../../../../hooks/useCounterTravellersState';
-import useModalState from '../../../../hooks/useModalState';
+import useCounterTravellersState from '../../../../components/searchBar/hooks/useCounterTravellersState';
+import useModalState, { ModalType } from '../../../../hooks/useModalState';
 import { selectAuthState } from '../../../../redux/features/auth/authSlice';
 import { ADD_TO_BASKET } from '../../../../redux/features/tour/tourSlice';
 import { formatDateRange } from '../../../../utils/format-date';
@@ -25,6 +25,7 @@ type Props = ITour
 const ReservationCard: React.FC<Props> = ({ title, reviews, averageGeneralRating, schedule, id }) => {
     const { numberOfTravellers, countTravellers } = useCounterTravellersState();
     const { openedModal, handleCloseModal, handleOpenModal } = useModalState();
+    const { Counter } = ModalType;
     const { isLoggedIn } = useAppSelector(selectAuthState);
     const { isSuccess } = useAppSelector(selectOrderState);
     const dispatch = useAppDispatch();
@@ -63,14 +64,23 @@ const ReservationCard: React.FC<Props> = ({ title, reviews, averageGeneralRating
     const handleAddToBasket = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault();
 
-        const basket = {
+        // export type ITourInBasket = {
+        //     id: string,
+        //     tourId: string,
+        //     title: string,
+        //     thumbnail: string,
+        //     schedule: ISchedule,
+        //     numberOfTravellers: number,
+        // }
+
+        const basket = [{
             id: uuidv4(),
             tourId: id,
             scheduleId: selectedDate.id,
             numberOfTravellers: numberOfTravellers,
-        }
+        }]
 
-        dispatch(ADD_TO_BASKET(basket));
+        //dispatch(ADD_TO_BASKET(basket));
     }
 
     return(
@@ -88,10 +98,10 @@ const ReservationCard: React.FC<Props> = ({ title, reviews, averageGeneralRating
 
                 <div className="reservation-card__wrapper-inputs">
 
-                    <button className='reservation-card__people' onClick={e => handleOpenModal('counter')}>
+                    <button className='reservation-card__people' onClick={e => handleOpenModal(Counter)}>
                         <div className=''>Who</div>
                         <div className=''>{numberOfTravellers} people</div>
-                        <CounterTravellersModal isModalOpen={openedModal === 'counter'} closeModal={handleCloseModal} numberOfTravellers={numberOfTravellers} countTravellers={countTravellers}/>
+                        <CounterTravellersModal />
                     </button>
 
                     <label className='reservation-card__date'>Pick dates:

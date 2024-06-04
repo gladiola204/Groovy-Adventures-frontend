@@ -8,7 +8,7 @@ import validateFormData from "../admin/helpers/validateFormData";
 import useFormFieldErrors from "../../hooks/useFormFieldErrors";
 import SuccessMessage from "../../components/SuccessMessage";
 import authThunks from "../../redux/features/auth/authThunks";
-import LoadingCircle from "../../components/LoadingSpinner";
+import useGlobalIsLoading from "../../hooks/useGlobalIsLoading";
 
 const changePasswordValidation = Yup.object().shape({
     oldPassword: Yup.string().trim().min(4).max(20).required(),
@@ -17,7 +17,8 @@ const changePasswordValidation = Yup.object().shape({
 
 const ChangePassword: React.FC = () => {
     const dispatch = useAppDispatch();
-    const { isLoading, isSuccess, errorMessage } = useAppSelector(selectAuthState);
+    const { isSuccess, errorMessage } = useAppSelector(selectAuthState);
+    const isLoading = useGlobalIsLoading();
     const [currentPassword, setCurrentPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const { setError, generateFormErrorMessage } = useFormFieldErrors();

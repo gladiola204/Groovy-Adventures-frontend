@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import useCategorySelector from "../../../../hooks/useCategoriesSelector";
-import useAppSelector from "../../../../hooks/useAppSelector";
-import { RootState } from "../../../../redux/store";
+import { selectTourState } from "../../../../../../redux/features/tour/tourSlice";
+import useAppSelector from "../../../../../../hooks/useAppSelector";
+import { selectCategoryState } from "../../../../../../redux/features/category/categorySlice";
 
 const useSelectedCategory = () => {
-    const { categories } = useCategorySelector();
-    const { tour } = useAppSelector((state: RootState) => state.tour);
+    const { categories } = useAppSelector(selectCategoryState);
+    const { tour } = useAppSelector(selectTourState);
     const [selectedCategory, setSelectedCategory] = useState('');
 
     useEffect(() => {

@@ -7,6 +7,7 @@ import validateFormData from "../../admin/helpers/validateFormData";
 import registerValidationSchema from "./registerValidationSchema";
 import useFormFieldErrors from "../../../hooks/useFormFieldErrors";
 import authThunks from "../../../redux/features/auth/authThunks";
+import useGlobalIsLoading from "../../../hooks/useGlobalIsLoading";
 
 const Register: React.FC = () => {
     const [email, setEmail] = useState('');
@@ -15,7 +16,8 @@ const Register: React.FC = () => {
     const { setError } = useFormFieldErrors();
 
     const dispatch = useAppDispatch();
-    const { isSuccess, isLoading } = useAppSelector(selectAuthState);
+    const { isSuccess } = useAppSelector(selectAuthState);
+    const isLoading = useGlobalIsLoading();
     const navigate = useNavigate();
 
     const handleSubmit = async(e: React.FormEvent<HTMLFormElement>) => {

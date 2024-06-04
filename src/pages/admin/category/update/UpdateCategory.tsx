@@ -1,7 +1,7 @@
 import useAdminAccessGuard from "../../../../hooks/useAdminAccessGuard";
 import useAppDispatch from "../../../../hooks/useAppDispatch";
 import useFormFieldErrors from "../../../../hooks/useFormFieldErrors";
-import useImageUpload from "../../../../hooks/useImageUpload";
+import useImageUpload from "../../../../hooks/useImageState";
 import validateFormData from "../../helpers/validateFormData";
 import createCategoryValidationSchema from "../create/createCategoryValidationSchema";
 import GenerateCategoryForm, { CategoryFormData } from "../generateCategoryForm";
@@ -17,7 +17,7 @@ const UpdateCategory: React.FC = () => {
     useAdminAccessGuard('/login');
     const dispatch = useAppDispatch();
     const { setError } = useFormFieldErrors();
-    const { category, isLoading, isError, errorMessage } = useAppSelector((state: RootState) => state.category);
+    const { category, isError, errorMessage } = useAppSelector((state: RootState) => state.category);
     const { slug } = useParams();
 
     useEffect(() => {

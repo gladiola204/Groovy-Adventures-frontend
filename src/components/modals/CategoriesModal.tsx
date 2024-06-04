@@ -1,15 +1,12 @@
-import Modal from 'react-modal';
-import categoryIcon from '../../assets/mindfulnessIcon-black.svg';
 import '../../sass/main.scss';
-import ModalCloseButton from './shared/ModalCloseButton';
 import { Link } from 'react-router-dom';
 import DialogOrModal from './shared/DialogOrModal';
-import { Category } from '../../redux/features/category/categorySlice';
+import { ICategory } from '../../redux/features/category/categorySlice.interface';
 
 interface CategoriesModalProps {
     isModalOpen: boolean,
     closeModal: (event: React.MouseEvent<Element, MouseEvent> | React.KeyboardEvent<Element>) => void,
-    categories: Category[],
+    categories: ICategory[],
 }
   
 const CategoriesModal: React.FC<CategoriesModalProps> = ({ isModalOpen, closeModal, categories }) => {
